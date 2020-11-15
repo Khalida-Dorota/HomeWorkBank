@@ -23,8 +23,9 @@ namespace Bank
                 Console.WriteLine("4. Accounts balance");
                 Console.WriteLine("5. Transfer History");
                 Console.WriteLine("6. Exit");
+                Console.WriteLine();
 
-                int userOption = GetIntFromUser("Select option by number:");
+                int userOption = GetIntFromUser("** Select option by number: **");
 
                 switch (userOption)
                 {
@@ -47,16 +48,14 @@ namespace Bank
                         Exit();
                         break;
                     default:
-                        Console.WriteLine("Unknown option");
+                        Console.WriteLine();
+                        Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                        Console.WriteLine("Unknown option.");
+                        Console.WriteLine("!!!!!!!!!!!!!!!!!");
                         break;
                 }
 
             } while (true);
-        }
-
-        void TransferHistory()
-        {
-            _accountsAdmin.ShowHistoryTransfer();
         }
 
         void UserWantsToCreateAccount()
@@ -64,7 +63,7 @@ namespace Bank
             var newAccountName = "";
             do
             {
-                newAccountName = GetUserInputBasedOnMessage("Enter your account name");
+                newAccountName = GetUserInputBasedOnMessage("** Enter your account name: **");
                 bool exist = _accountsAdmin.CheckIfAccountExistByName(newAccountName);
 
                 if (exist != true)
@@ -73,7 +72,10 @@ namespace Bank
                 }
                 else
                 {
-                    Console.WriteLine("Konto o takiej nazwie istnieje");
+                    Console.WriteLine();
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("Account with that name exists.");
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 }
 
             } while (true);
@@ -84,11 +86,11 @@ namespace Bank
             var account = new Account(newAccountName, newAccountValue);
 
             Console.WriteLine();
-            Console.WriteLine("-----------------------------");
             Console.WriteLine("\t Your account details :");
+            Console.WriteLine("-----------------------------");
             Console.WriteLine("Name Account: " + account.AccountName);
             Console.WriteLine("Number account: " + account.AccountNumber);
-            Console.WriteLine("Value: " + "{0:C}", account.AccountValue);
+            Console.WriteLine("Value: " + "{0:C} ", account.AccountValue);
             Console.WriteLine("-----------------------------");
             _accountsAdmin.AddNewAccountToList(account);
 
@@ -99,15 +101,19 @@ namespace Bank
         {
             if (!DoesUserHaveEnoughAccounts(2))
             {
+                Console.WriteLine();
+                Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("No account");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 return;
             }
 
             string fromAccount = "";
-
+            
             do
             {
                 ShowAllOwnAccounts();
-                fromAccount = GetUserInputBasedOnMessage("Podaj nazwe kona z ktorego chcesz wykonac przelew:");
+                fromAccount = GetUserInputBasedOnMessage("** Enter the account name from which you want to make the transfer: **");
                 bool exist = _accountsAdmin.CheckIfAccountExistByName(fromAccount);
 
                 if (exist == true)
@@ -116,7 +122,10 @@ namespace Bank
                 }
                 else
                 {
-                    Console.WriteLine("Takie konto nie istnieje.");
+                    Console.WriteLine();
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("Account with that name does't exists.");
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 }
 
             } while (true);
@@ -126,8 +135,10 @@ namespace Bank
             do
             {
                 ShowAllOwnAccounts();
-                Console.WriteLine("Z ktrego konta wykonujesz przelew : " + fromAccount);
-                toAccount = GetUserInputBasedOnMessage("Podaj nazwe kona do ktorego chcesz wykonac przelew:");
+                Console.WriteLine("***********************************");
+                Console.WriteLine("Account name from which you make the transfer : " + fromAccount);
+                Console.WriteLine("***********************************");
+                toAccount = GetUserInputBasedOnMessage("** Enter the account name which you want to make the transfer: **");
                 bool exist = _accountsAdmin.CheckIfAccountExistByName(toAccount);
 
                 if (exist == true && toAccount != fromAccount)
@@ -136,22 +147,28 @@ namespace Bank
                 }
                 else if (toAccount == fromAccount)
                 {
-                    Console.WriteLine(" Nie moesz wykonywac przelewu na to samo konto");
+                    Console.WriteLine();
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("Cannot transfer to the same account.");
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 }
                 else
                 {
-                    Console.WriteLine("Takie konto nie istnieje.");
+                    Console.WriteLine();
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("Account with that name does't exists.");
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 }
 
             } while (true);
 
-            string nameOfTransfer = GetUserInputBasedOnMessage("Podah tytu przelewu");
+            string nameOfTransfer = GetUserInputBasedOnMessage("** Enter name transfer: **");
 
             float howManyCashwantTranfer = 0;
 
             do
             {
-                howManyCashwantTranfer = (GetFloatFromUser("Podaj ile hasju chcesz przelac (korzystaj z \".\")"));
+                howManyCashwantTranfer = (GetFloatFromUser("** Enter value of transfer: **"));
 
                 bool possible = _accountsAdmin.CheckIfPossibleTransfer(fromAccount, howManyCashwantTranfer);
 
@@ -161,14 +178,17 @@ namespace Bank
                 }
                 else
                 {
-                    Console.WriteLine($"Nie masz wystarczajacych sriodkow na koncie.");
+                    Console.WriteLine();
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("There is not sufficient funding.");
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 }
 
             } while (true);
 
             DateTime today = DateTime.Now;
 
-            Console.WriteLine("Data wykonania przelewu to : " + today);
+            Console.WriteLine("Date of the transfer : " + today);
 
             _accountsAdmin.CashTransfer(fromAccount, toAccount, nameOfTransfer, howManyCashwantTranfer, today);
 
@@ -178,6 +198,10 @@ namespace Bank
         {
             if (!DoesUserHaveEnoughAccounts(1))
             {
+                Console.WriteLine();
+                Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("No account");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 return;
             }
 
@@ -186,7 +210,7 @@ namespace Bank
             do
             {
                 ShowAllOwnAccounts();
-                fromAccount = GetUserInputBasedOnMessage("Podaj nazwe kona z ktorego chcesz wykonac przelew:");
+                fromAccount = GetUserInputBasedOnMessage("** Enter the account name from which you want to make the transfer: **");
                 bool exist = _accountsAdmin.CheckIfAccountExistByName(fromAccount);
 
                 if (exist == true)
@@ -195,7 +219,10 @@ namespace Bank
                 }
                 else
                 {
-                    Console.WriteLine("Takie konto nie istnieje.");
+                    Console.WriteLine();
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("Account with that name does't exists.");
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 }
 
             } while (true);
@@ -204,16 +231,16 @@ namespace Bank
 
             string toAccount = "C6A8C9AC-CEEB-4F50-AC92-DE355AB6E699";
 
-            Console.WriteLine($"Wykonujesz przelew na konto XYZ. nr konta : {toAccount}");
+            Console.WriteLine($"Account number which you make the transfer :  {toAccount}");
 
 
-            string nameOfTransfer = GetUserInputBasedOnMessage("Podah tytu przelewu");
+            string nameOfTransfer = GetUserInputBasedOnMessage("** Enter name transfer: **");
 
             float howManyCashwantTranfer = 0;
 
             do
             {
-                howManyCashwantTranfer = (GetFloatFromUser("Podaj ile hasju chcesz przelac (korzystaj z \".\")"));
+                howManyCashwantTranfer = (GetFloatFromUser("** Enter value of transfer: **"));
 
                 bool possible = _accountsAdmin.CheckIfPossibleTransfer(fromAccount, howManyCashwantTranfer);
 
@@ -223,7 +250,10 @@ namespace Bank
                 }
                 else
                 {
-                    Console.WriteLine($"Nie masz wystarczajacych sriodkow na koncie.");
+                    Console.WriteLine();
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("There is not sufficient funding.");
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 }
 
             }
@@ -231,38 +261,34 @@ namespace Bank
 
             DateTime today = DateTime.Now;
 
-            Console.WriteLine("Data wykonania przelewu to : " + today);
+            Console.WriteLine("Date of the transfer : " + today);
 
             _accountsAdmin.CashTransferOut(fromAccount, toAccount, nameOfTransfer, howManyCashwantTranfer, today);
 
         }
 
-        bool DoesUserHaveEnoughAccounts(int minimalQuantity)
-        {
-            int accountsQuantity = _accountsAdmin.GetUserAccountsCount();
-
-            if (accountsQuantity >= minimalQuantity)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         void ShowAllOwnAccounts()
         {
-            Console.WriteLine();
-            Console.WriteLine("**************************************************");
             Console.WriteLine();
             Console.WriteLine("\t All available accounts:");
             Console.WriteLine("-----------------------------");
             _accountsAdmin.ShowAllAccountsInList();
             Console.WriteLine();
-            Console.WriteLine("**************************************************");
         }
 
+        void TransferHistory()
+        {
+            Console.WriteLine();
+            Console.WriteLine("\t Transfer History:");
+            Console.WriteLine("-----------------------------");
+            _accountsAdmin.ShowHistoryTransfer();
+        }
+
+        void Exit()
+        {
+            Console.WriteLine("End program.");
+            Environment.Exit(0);
+        }
 
 
         string GetUserInputBasedOnMessage(string messageForUser)
@@ -276,7 +302,10 @@ namespace Bank
 
                 if (string.IsNullOrEmpty(input))
                 {
+                    Console.WriteLine();
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
                     Console.WriteLine("Input was empty");
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 }
             }
             while (string.IsNullOrEmpty(input));
@@ -296,7 +325,10 @@ namespace Bank
 
                 if (parseSuccess == false)
                 {
-                    Console.WriteLine("Nie podałeś liczby:" + userIntOption);
+                    Console.WriteLine();
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("This is not int:" + userIntOption);
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 }
 
             } while (!parseSuccess);
@@ -320,7 +352,10 @@ namespace Bank
 
                 if (parseSuccess == false)
                 {
-                    Console.WriteLine("Nie podałeś liczby:" + userFloatOption);
+                    Console.WriteLine();
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("This is not float:" + userFloatOption);
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 }
 
             } while (!parseSuccess);
@@ -328,11 +363,18 @@ namespace Bank
             return userFloatNumber;
         }
 
-        void Exit()
+        bool DoesUserHaveEnoughAccounts(int minimalQuantity)
         {
-            Console.WriteLine("Good Bye!");
-            Environment.Exit(0);
-        }
+            int accountsQuantity = _accountsAdmin.GetUserAccountsCount();
 
+            if (accountsQuantity >= minimalQuantity)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

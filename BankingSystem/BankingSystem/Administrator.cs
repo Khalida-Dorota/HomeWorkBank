@@ -19,35 +19,40 @@ namespace Bank
             {
                 Console.WriteLine($"Name Account: {savedAccount.AccountName}");
                 Console.WriteLine($"Number account: {savedAccount.AccountNumber}");
-                Console.WriteLine("Value:" + "{0:C}", savedAccount.AccountValue);
+                Console.WriteLine("Account value:" + "{0:C} ", savedAccount.AccountValue);
                 Console.WriteLine("-----------------------------");
             }
 
             if (_accounts.Count == 0)
             {
+                Console.WriteLine();
+                Console.WriteLine("!!!!!!!!!!!!!!!!!");
                 Console.WriteLine("No accounts has been created");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!");
             }
         }
 
-        public int GetUserAccountsCount()
+        public void ShowHistoryTransfer()
         {
-            return _accounts.Count;
-        }
-
-        public bool CheckIfAccountExistByName(string nametoSearch)
-        {
-            bool found = false;
-
-            Account account = getAccountByName(nametoSearch);
-
-            if (account != null)
+            foreach (HistoryTransfer saveHistory in _history)
             {
-                found = true;
+                Console.WriteLine($"Date of the transfer:  {saveHistory.Date}");
+                Console.WriteLine($"Number account from : {saveHistory.AccountFrom}");
+                Console.WriteLine($"Number account to: {saveHistory.AccountTo }");
+                Console.WriteLine($"Name of the transfer: {saveHistory.NameTransfer}");
+                Console.WriteLine($"Transfer value:"+"{0:C} ",saveHistory.ValueTransfer);
+                Console.WriteLine($"Transfer type: {saveHistory.TypeTransfer}");
+                Console.WriteLine("-----------------------------");
             }
 
-            return found;
+            if (_history.Count == 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("!!!!!!!!!!!!!!!!!");
+                Console.WriteLine("No transfers has been sent");
+                Console.WriteLine("!!!!!!!!!!!!!!!!!");
+            }
         }
-
 
         public void CashTransfer(string from, string to, string nameTransfer, float cash, DateTime date)
         {
@@ -80,6 +85,19 @@ namespace Bank
             _history.Add(transferHistoryOutgoing);
         }
 
+        private void informAboutTransfer(string to, string nameTransfer, float cash, DateTime date, string accontfrom)
+        {
+            Console.WriteLine();
+            Console.WriteLine("\t Transfer summary:");
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine($"Name account from: {accontfrom} ");
+            Console.WriteLine($"Name account to: {to}");
+            Console.WriteLine($"Name of the transfer: {nameTransfer}");
+            Console.WriteLine($"Transfer value: " + "{0:C} ", cash);
+            Console.WriteLine($"Date of the transfer: {date}");
+            Console.WriteLine("-----------------------------");
+        }
+
         public bool CheckIfPossibleTransfer(string from, float cash)
         {
             Account accontfrom = null;
@@ -103,22 +121,18 @@ namespace Bank
             return possible;
         }
 
-        public void ShowHistoryTransfer()
+        public bool CheckIfAccountExistByName(string nametoSearch)
         {
-            foreach (HistoryTransfer saveHistory in _history)
+            bool found = false;
+
+            Account account = getAccountByName(nametoSearch);
+
+            if (account != null)
             {
-                Console.WriteLine($"Data wykonania przelewu: {saveHistory.Date}");
-                Console.WriteLine($"Nr konta żródłowego : {saveHistory.AccountFrom}");
-                Console.WriteLine($"Nr konto docolowego: {saveHistory.AccountTo }");
-                Console.WriteLine($"Tytuł przelewu: {saveHistory.NameTransfer}");
-                Console.WriteLine($"Kwota przelewu: {saveHistory.ValueTransfer}");
-                Console.WriteLine($"Jaki jest to przelew: {saveHistory.TypeTransfer}");
+                found = true;
             }
 
-            if (_history.Count == 0)
-            {
-                Console.WriteLine("No transfers has been sent");
-            }
+            return found;
         }
 
         private Account getAccountByName(string nametoSearch)
@@ -136,16 +150,9 @@ namespace Bank
 
             return foundAccount;
         }
-        private void informAboutTransfer(string to, string nameTransfer, float cash, DateTime date, string accontfrom)
+        public int GetUserAccountsCount()
         {
-            Console.WriteLine("\t Podsumowanie wukonanego przelewu:");
-            Console.WriteLine("-----------------------------");
-            Console.WriteLine($"Przelew został wykonany z konta: {accontfrom} ");
-            Console.WriteLine($"Przelew został wykonany na konto: {to}");
-            Console.WriteLine($"Tytul przelewu:{nameTransfer}");
-            Console.WriteLine($"Kwota pzrelewu:" + "{0:C}", cash);
-            Console.WriteLine($"Data wykonanai przelewu:{date}");
-            Console.WriteLine("-----------------------------");
+            return _accounts.Count;
         }
     }
 }
