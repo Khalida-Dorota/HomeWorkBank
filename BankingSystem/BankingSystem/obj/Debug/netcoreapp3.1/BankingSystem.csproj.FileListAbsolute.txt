@@ -1,0 +1,13 @@
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\bin\Debug\netcoreapp3.1\BankingSystem.exe
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\bin\Debug\netcoreapp3.1\BankingSystem.deps.json
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\bin\Debug\netcoreapp3.1\BankingSystem.runtimeconfig.json
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\bin\Debug\netcoreapp3.1\BankingSystem.runtimeconfig.dev.json
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\bin\Debug\netcoreapp3.1\BankingSystem.dll
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\bin\Debug\netcoreapp3.1\BankingSystem.pdb
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\obj\Debug\netcoreapp3.1\BankingSystem.csprojAssemblyReference.cache
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\obj\Debug\netcoreapp3.1\BankingSystem.AssemblyInfoInputs.cache
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\obj\Debug\netcoreapp3.1\BankingSystem.AssemblyInfo.cs
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\obj\Debug\netcoreapp3.1\BankingSystem.csproj.CoreCompileInputs.cache
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\obj\Debug\netcoreapp3.1\BankingSystem.dll
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\obj\Debug\netcoreapp3.1\BankingSystem.pdb
+C:\Users\Khalida\Desktop\HomeWorkBank\BankingSystem\BankingSystem\obj\Debug\netcoreapp3.1\BankingSystem.genruntimeconfig.cache
